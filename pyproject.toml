@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "openg2p-rgen2-master-data"
+name = "openg2p-gen2-master-data"
 authors = [
   { name="OpenG2P", email="info@openg2p.org" },
 ]
@@ -16,7 +16,9 @@ classifiers = [
   "Operating System :: OS Independent",
 ]
 dependencies = [
-  "openg2p-fastapi-common >=1.1.2"
+  "openg2p-fastapi-common >=1.1.4",
+  "asyncpg",
+  "psycopg2"
   ]
 dynamic = ["version"]
 

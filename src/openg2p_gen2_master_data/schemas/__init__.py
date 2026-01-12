@@ -1,9 +1,4 @@
-from .g2p_attributes import (
-    GetG2PAttributeValuesRequest,
-    GetG2PAttributeValuesRequestPayload,
-    GetG2PAttributeValuesResponse,
-    GetG2PAttributeValuesResponseBody,
-    G2PAttributeValueData,
+from .g2p_admin_area import (
     GetAdministrativeAreaLargeRequest,
     GetAdministrativeAreaLargeRequestPayload,
     GetAdministrativeAreaLargeResponse,
@@ -15,21 +10,3 @@ from .g2p_attributes import (
     GetAdministrativeAreaSmallResponseBody,
     AdministrativeAreaSmallData,
 )
-
-__all__ = [
-    "GetG2PAttributeValuesRequest",
-    "GetG2PAttributeValuesRequestPayload",
-    "GetG2PAttributeValuesResponse",
-    "GetG2PAttributeValuesResponseBody",
-    "G2PAttributeValueData",
-    "GetAdministrativeAreaLargeRequest",
-    "GetAdministrativeAreaLargeRequestPayload",
-    "GetAdministrativeAreaLargeResponse",
-    "GetAdministrativeAreaLargeResponseBody",
-    "AdministrativeAreaLargeData",
-    "GetAdministrativeAreaSmallRequest",
-    "GetAdministrativeAreaSmallRequestPayload",
-    "GetAdministrativeAreaSmallResponse",
-    "GetAdministrativeAreaSmallResponseBody",
-    "AdministrativeAreaSmallData",
-]

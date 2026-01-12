@@ -1,3 +1,2 @@
-from .g2p_attribute_controller import G2PAttributeController
+from .g2p_admin_area_controller import G2PAdminAreaController
 
-__all__ = ["G2PAttributeController"]
