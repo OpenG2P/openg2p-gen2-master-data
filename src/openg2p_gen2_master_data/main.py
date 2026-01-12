@@ -2,7 +2,7 @@
 
 # ruff: noqa: I001
 
-from .app import Initializer
+from openg2p_gen2_master_data.app import Initializer
 from openg2p_fastapi_common.ping import PingInitializer
 
 initializer = Initializer()
