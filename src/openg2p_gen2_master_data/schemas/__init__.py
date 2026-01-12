@@ -4,6 +4,16 @@ from .g2p_attributes import (
     GetG2PAttributeValuesResponse,
     GetG2PAttributeValuesResponseBody,
     G2PAttributeValueData,
+    GetAdministrativeAreaLargeRequest,
+    GetAdministrativeAreaLargeRequestPayload,
+    GetAdministrativeAreaLargeResponse,
+    GetAdministrativeAreaLargeResponseBody,
+    AdministrativeAreaLargeData,
+    GetAdministrativeAreaSmallRequest,
+    GetAdministrativeAreaSmallRequestPayload,
+    GetAdministrativeAreaSmallResponse,
+    GetAdministrativeAreaSmallResponseBody,
+    AdministrativeAreaSmallData,
 )
 
 __all__ = [
@@ -12,4 +22,14 @@ __all__ = [
     "GetG2PAttributeValuesResponse",
     "GetG2PAttributeValuesResponseBody",
     "G2PAttributeValueData",
+    "GetAdministrativeAreaLargeRequest",
+    "GetAdministrativeAreaLargeRequestPayload",
+    "GetAdministrativeAreaLargeResponse",
+    "GetAdministrativeAreaLargeResponseBody",
+    "AdministrativeAreaLargeData",
+    "GetAdministrativeAreaSmallRequest",
+    "GetAdministrativeAreaSmallRequestPayload",
+    "GetAdministrativeAreaSmallResponse",
+    "GetAdministrativeAreaSmallResponseBody",
+    "AdministrativeAreaSmallData",
 ]
