@@ -1,10 +1,9 @@
 import logging
 from typing import List, Optional
 from sqlalchemy import select
-from sqlalchemy.ext.asyncio import async_sessionmaker
 from openg2p_fastapi_common.service import BaseService
-from openg2p_fastapi_common.context import dbengine
 
+from ..engine import get_session_maker
 from ..models import G2PPartner
 from ..schemas import G2PPartnerData
 
@@ -26,9 +25,7 @@ class G2PPartnerService(BaseService):
         Returns:
             List of G2PPartnerData
         """
-        session_maker = async_sessionmaker(dbengine.get(), expire_on_commit=False)
-        
-        async with session_maker() as session:
+        async with get_session_maker()() as session:
             query = select(G2PPartner)
             result = await session.execute(query)
             partners = result.scalars().all()
@@ -53,9 +50,7 @@ class G2PPartnerService(BaseService):
         Returns:
             G2PPartnerData if found, None otherwise
         """
-        session_maker = async_sessionmaker(dbengine.get(), expire_on_commit=False)
-        
-        async with session_maker() as session:
+        async with get_session_maker()() as session:
             partner = await session.get(G2PPartner, partner_id)
             
             if partner is None:

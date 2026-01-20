@@ -1,7 +1,6 @@
 from .g2p_admin_area import (
-    GetAdministrativeAreaLargeRequest,
-    GetAdministrativeAreaLargeRequestPayload,
-    GetAdministrativeAreaLargeResponse,
+    GetAllAdministrativeAreaLargeRequest,
+    GetAllAdministrativeAreaLargeResponse,
     GetAdministrativeAreaLargeResponseBody,
     AdministrativeAreaLargeData,
     GetAdministrativeAreaSmallRequest,

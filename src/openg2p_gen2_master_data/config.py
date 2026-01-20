@@ -1,10 +1,10 @@
-from openg2p_fastapi_common.config import Settings
+from openg2p_fastapi_common.config import Settings as BaseSettings
 from pydantic_settings import SettingsConfigDict
 
 from . import __version__
 
 
-class Settings(Settings):
+class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_prefix="gen2_master_data_api_", env_file=".env", extra="allow"
     )
@@ -19,6 +19,7 @@ class Settings(Settings):
     openapi_version: str = __version__
 
     # Master Data Database
+    db_driver: str = "postgresql+asyncpg"
     db_username: str = "postgres"
     db_password: str = "password"
     db_hostname: str = "localhost"
