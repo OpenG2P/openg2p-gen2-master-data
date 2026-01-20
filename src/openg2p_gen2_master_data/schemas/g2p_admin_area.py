@@ -11,15 +11,15 @@ from openg2p_fastapi_common.schemas import (
 
 
 # Administrative Area Large Request/Response
-class GetAdministrativeAreaLargeRequestPayload(BaseModel):
-    administrative_area_large_id: Optional[str] = None
 
+class GetAdministrativeAreaLargeRequestPayload(BaseModel):
+    pass
 
 class GetAdministrativeAreaLargeRequestBody(G2PRequestBody):
     request_payload: GetAdministrativeAreaLargeRequestPayload
 
 
-class GetAdministrativeAreaLargeRequest(G2PRequest):
+class GetAllAdministrativeAreaLargeRequest(G2PRequest):
     request_body: GetAdministrativeAreaLargeRequestBody
 
 
@@ -33,14 +33,14 @@ class GetAdministrativeAreaLargeResponseBody(G2PResponseBody):
     response_payload: List[AdministrativeAreaLargeData]
 
 
-class GetAdministrativeAreaLargeResponse(G2PResponse):
+class GetAllAdministrativeAreaLargeResponse(G2PResponse):
     response_header: G2PResponseHeader
     response_body: GetAdministrativeAreaLargeResponseBody
 
 
 # Administrative Area Small Request/Response
 class GetAdministrativeAreaSmallRequestPayload(BaseModel):
-    pass
+    administrative_area_large_id: Optional[str] = None
 
 
 class GetAdministrativeAreaSmallRequestBody(G2PRequestBody):

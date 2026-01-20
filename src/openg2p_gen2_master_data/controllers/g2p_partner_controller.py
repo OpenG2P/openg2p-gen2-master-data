@@ -20,7 +20,7 @@ class G2PPartnerController(BaseController):
         super().__init__(**kwargs)
 
         self.router.tags += ["Master Data"]
-        self.partner_service = G2PPartnerService().get_component()
+        self.partner_service = G2PPartnerService.get_component()
         self.request_response_helper = RequestResponseHelper().get_component()
         self.router.prefix = "/master_data"
 
@@ -48,12 +48,12 @@ class G2PPartnerController(BaseController):
 
             _logger.debug("Partners: %s", partners)
 
-            return self.request_response_helper.construct_success_response(
+            return self.request_response_helper.construct_partners_success_response(
                 request, partners
             )
         except Exception as e:
             _logger.error("Error getting all partners: %s", str(e), exc_info=True)
-            return self.request_response_helper.construct_error_response(e, request)
+            return self.request_response_helper.construct_partners_error_response(e, request)
 
     async def get_partner(
         self,
@@ -68,10 +68,10 @@ class G2PPartnerController(BaseController):
 
             _logger.debug("Partner: %s", partner)
 
-            return self.request_response_helper.construct_success_response(
+            return self.request_response_helper.construct_partner_success_response(
                 request, partner
             )
         except Exception as e:
             _logger.error("Error getting partner: %s", str(e), exc_info=True)
-            return self.request_response_helper.construct_error_response(e, request)
+            return self.request_response_helper.construct_partner_error_response(e, request)
 

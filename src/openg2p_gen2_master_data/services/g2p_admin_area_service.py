@@ -1,10 +1,9 @@
 import logging
-from typing import List, Optional
+from typing import List
 from sqlalchemy import select
-from sqlalchemy.ext.asyncio import async_sessionmaker
 from openg2p_fastapi_common.service import BaseService
-from openg2p_fastapi_common.context import dbengine
 
+from ..engine import get_session_maker
 from ..models import G2PAdministrativeAreaLarge, G2PAdministrativeAreaSmall
 from ..schemas import (
     AdministrativeAreaLargeData,
@@ -22,33 +21,15 @@ _logger = logging.getLogger(_config.logging_default_logger_name if _config else 
 
 
 class G2PAdminAreaService(BaseService):
-    async def get_administrative_area_large(
-        self,
-        administrative_area_large_id: Optional[str] = None,
-    ) -> List[AdministrativeAreaLargeData]:
+    async def get_all_administrative_area_large(self) -> List[AdministrativeAreaLargeData]:
         """
-        Get administrative area large records.
-        If administrative_area_large_id is provided, returns only that record.
-        If not provided, returns all records.
+        Get all administrative area large records.
         
-        Args:
-            administrative_area_large_id: Optional area ID to filter by
-            
         Returns:
             List of AdministrativeAreaLargeData
         """
-        session_maker = async_sessionmaker(dbengine.get(), expire_on_commit=False)
-        
-        async with session_maker() as session:
-            query = select(G2PAdministrativeAreaLarge)
-            
-            if administrative_area_large_id is not None:
-                query = query.where(
-                    G2PAdministrativeAreaLarge.area_id == administrative_area_large_id
-                )
-            
-            result = await session.execute(query)
-            areas = result.scalars().all()
+        async with get_session_maker()() as session:
+            areas = (await session.execute(select(G2PAdministrativeAreaLarge))).scalars().all()
             
             return [
                 AdministrativeAreaLargeData(
@@ -59,25 +40,22 @@ class G2PAdminAreaService(BaseService):
                 for area in areas
             ]
 
-    async def get_administrative_area_small(
-        self,
-    ) -> List[AdministrativeAreaSmallData]:
+    async def get_administrative_area_small_for_large_area(self, administrative_area_large_id: str ) -> List[AdministrativeAreaSmallData]:
         """
         Get all administrative area small records with their related large area information.
         
         Returns:
             List of AdministrativeAreaSmallData
         """
-        session_maker = async_sessionmaker(dbengine.get(), expire_on_commit=False)
-        
-        async with session_maker() as session:
-            # Join with large area to get related fields
-            query = select(
-                G2PAdministrativeAreaSmall,
-                G2PAdministrativeAreaLarge
-            ).join(
-                G2PAdministrativeAreaLarge,
-                G2PAdministrativeAreaSmall.administrative_area_large_id == G2PAdministrativeAreaLarge.area_id
+        async with get_session_maker()() as session:
+            
+            query = (
+                select(G2PAdministrativeAreaSmall, G2PAdministrativeAreaLarge)
+                .join(
+                    G2PAdministrativeAreaLarge,
+                    G2PAdministrativeAreaSmall.administrative_area_large_id == G2PAdministrativeAreaLarge.area_id,
+                )
+                .where(G2PAdministrativeAreaSmall.administrative_area_large_id == administrative_area_large_id)
             )
             
             result = await session.execute(query)
