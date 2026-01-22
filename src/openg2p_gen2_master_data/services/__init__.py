@@ -1,2 +1,2 @@
-from .g2p_admin_area_service import G2PAdminAreaService
+from .g2p_geo_service import G2PGeoService
 from .g2p_partner_service import G2PPartnerService

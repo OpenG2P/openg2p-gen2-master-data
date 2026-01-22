@@ -1,13 +1,16 @@
-from .g2p_admin_area import (
-    GetAllAdministrativeAreaLargeRequest,
-    GetAllAdministrativeAreaLargeResponse,
-    GetAdministrativeAreaLargeResponseBody,
-    AdministrativeAreaLargeData,
-    GetAdministrativeAreaSmallRequest,
-    GetAdministrativeAreaSmallRequestPayload,
-    GetAdministrativeAreaSmallResponse,
-    GetAdministrativeAreaSmallResponseBody,
-    AdministrativeAreaSmallData,
+from .g2p_geo import (
+    GeoLevelData,
+    GetGeoLevelsRequestPayload,
+    GetGeoLevelsRequestBody,
+    GetGeoLevelsRequest,
+    GetGeoLevelsResponseBody,
+    GetGeoLevelsResponse,
+    GeoLevelValueData,
+    GetGeoLevelValuesRequestPayload,
+    GetGeoLevelValuesRequestBody,
+    GetGeoLevelValuesRequest,
+    GetGeoLevelValuesResponseBody,
+    GetGeoLevelValuesResponse,
 )
 from .g2p_partner import (
     GetAllPartnersRequest,
