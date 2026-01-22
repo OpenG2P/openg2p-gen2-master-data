@@ -1,17 +1,17 @@
 from datetime import datetime
 from typing import List, Optional
 from openg2p_fastapi_common.service import BaseService
-from openg2p_fastapi_common.schemas import G2PRequest, G2PResponseHeader, G2PResponseStatus, G2PResponseBody
+from openg2p_fastapi_common.schemas import G2PResponseHeader, G2PResponseStatus
 
 from ..schemas import (
-    GetAllAdministrativeAreaLargeRequest,
-    GetAllAdministrativeAreaLargeResponse,
-    GetAdministrativeAreaLargeResponseBody,
-    AdministrativeAreaLargeData,
-    GetAdministrativeAreaSmallRequest,
-    GetAdministrativeAreaSmallResponse,
-    GetAdministrativeAreaSmallResponseBody,
-    AdministrativeAreaSmallData,
+    GeoLevelData,
+    GetGeoLevelsRequest,
+    GetGeoLevelsResponse,
+    GetGeoLevelsResponseBody,
+    GeoLevelValueData,
+    GetGeoLevelValuesRequest,
+    GetGeoLevelValuesResponse,
+    GetGeoLevelValuesResponseBody,
     GetAllPartnersRequest,
     G2PPartnersResponse,
     G2PPartnersResponseBody,
@@ -23,20 +23,20 @@ from ..schemas import (
 
 
 class RequestResponseHelper(BaseService):
-    def construct_success_response_large(
+    def construct_geo_levels_success_response(
         self,
-        g2p_request: GetAllAdministrativeAreaLargeRequest,
-        areas: List[AdministrativeAreaLargeData],
-    ) -> GetAllAdministrativeAreaLargeResponse:
+        g2p_request: GetGeoLevelsRequest,
+        levels: List[GeoLevelData],
+    ) -> GetGeoLevelsResponse:
         """
-        Construct a success response for get_administrative_area_large API.
+        Construct a success response for get_g2p_geo_levels API.
         
         Args:
             g2p_request: The G2P request object
-            areas: List of administrative area large data to return
+            levels: List of geo level data to return
             
         Returns:
-            GetAdministrativeAreaLargeResponse with success status
+            GetGeoLevelsResponse with success status
         """
         request_id = g2p_request.request_header.request_id if g2p_request.request_header else ""
 
@@ -48,30 +48,30 @@ class RequestResponseHelper(BaseService):
             response_timestamp=datetime.now(),
         )
 
-        response_body = GetAdministrativeAreaLargeResponseBody(
+        response_body = GetGeoLevelsResponseBody(
             pagination_response=None,
-            response_payload=areas,
+            response_payload=levels,
         )
 
-        return GetAllAdministrativeAreaLargeResponse(
+        return GetGeoLevelsResponse(
             response_header=response_header,
             response_body=response_body,
         )
 
-    def construct_error_response_large(
+    def construct_geo_levels_error_response(
         self,
         error: Exception,
-        g2p_request: GetAllAdministrativeAreaLargeRequest = None,
-    ) -> GetAllAdministrativeAreaLargeResponse:
+        g2p_request: GetGeoLevelsRequest = None,
+    ) -> GetGeoLevelsResponse:
         """
-        Construct an error response for get_administrative_area_large API.
+        Construct an error response for get_g2p_geo_levels API.
         
         Args:
             error: The exception that occurred
             g2p_request: Optional G2P request object
             
         Returns:
-            GetAdministrativeAreaLargeResponse with error status
+            GetGeoLevelsResponse with error status
         """
         if hasattr(error, "code") and hasattr(error, "message"):
             error_code = str(error.code)
@@ -92,30 +92,30 @@ class RequestResponseHelper(BaseService):
             response_timestamp=datetime.now(),
         )
 
-        response_body = GetAdministrativeAreaLargeResponseBody(
+        response_body = GetGeoLevelsResponseBody(
             pagination_response=None,
             response_payload=[],
         )
 
-        return GetAllAdministrativeAreaLargeResponse(
+        return GetGeoLevelsResponse(
             response_header=response_header,
             response_body=response_body,
         )
 
-    def construct_success_response_small(
+    def construct_geo_level_values_success_response(
         self,
-        g2p_request: GetAdministrativeAreaSmallRequest,
-        areas: List[AdministrativeAreaSmallData],
-    ) -> GetAdministrativeAreaSmallResponse:
+        g2p_request: GetGeoLevelValuesRequest,
+        values: List[GeoLevelValueData],
+    ) -> GetGeoLevelValuesResponse:
         """
-        Construct a success response for get_administrative_area_small API.
+        Construct a success response for get_g2p_geo_level_values API.
         
         Args:
             g2p_request: The G2P request object
-            areas: List of administrative area small data to return
+            values: List of geo level value data to return
             
         Returns:
-            GetAdministrativeAreaSmallResponse with success status
+            GetGeoLevelValuesResponse with success status
         """
         request_id = g2p_request.request_header.request_id if g2p_request.request_header else ""
 
@@ -127,30 +127,30 @@ class RequestResponseHelper(BaseService):
             response_timestamp=datetime.now(),
         )
 
-        response_body = GetAdministrativeAreaSmallResponseBody(
+        response_body = GetGeoLevelValuesResponseBody(
             pagination_response=None,
-            response_payload=areas,
+            response_payload=values,
         )
 
-        return GetAdministrativeAreaSmallResponse(
+        return GetGeoLevelValuesResponse(
             response_header=response_header,
             response_body=response_body,
         )
 
-    def construct_error_response_small(
+    def construct_geo_level_values_error_response(
         self,
         error: Exception,
-        g2p_request: GetAdministrativeAreaSmallRequest = None,
-    ) -> GetAdministrativeAreaSmallResponse:
+        g2p_request: GetGeoLevelValuesRequest = None,
+    ) -> GetGeoLevelValuesResponse:
         """
-        Construct an error response for get_administrative_area_small API.
+        Construct an error response for get_g2p_geo_level_values API.
         
         Args:
             error: The exception that occurred
             g2p_request: Optional G2P request object
             
         Returns:
-            GetAdministrativeAreaSmallResponse with error status
+            GetGeoLevelValuesResponse with error status
         """
         if hasattr(error, "code") and hasattr(error, "message"):
             error_code = str(error.code)
@@ -171,12 +171,12 @@ class RequestResponseHelper(BaseService):
             response_timestamp=datetime.now(),
         )
 
-        response_body = GetAdministrativeAreaSmallResponseBody(
+        response_body = GetGeoLevelValuesResponseBody(
             pagination_response=None,
             response_payload=[],
         )
 
-        return GetAdministrativeAreaSmallResponse(
+        return GetGeoLevelValuesResponse(
             response_header=response_header,
             response_body=response_body,
         )
