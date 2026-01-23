@@ -13,7 +13,6 @@ class G2PGeoLevel(BaseORMModel):
     level_mnemonic: Mapped[str] = mapped_column(String, nullable=False, unique=True, index=True)
     parent_level_id: Mapped[str] = mapped_column(
         String,
-        ForeignKey("g2p_geo_levels.level_id", ondelete="CASCADE"),
         nullable=True,
         index=True,
     )
@@ -27,14 +26,12 @@ class G2PGeoLevelValue(BaseORMModel):
     )
     level_id: Mapped[str] = mapped_column(
         String,
-        ForeignKey("g2p_geo_levels.level_id", ondelete="CASCADE"),
         nullable=False,
         index=True,
     )
     level_value_mnemonic: Mapped[str] = mapped_column(String, nullable=False, unique=True, index=True)
     parent_level_value_id: Mapped[str] = mapped_column(
         String,
-        ForeignKey("g2p_geo_level_values.level_value_id", ondelete="CASCADE"),
         nullable=True,
         index=True,
     )
