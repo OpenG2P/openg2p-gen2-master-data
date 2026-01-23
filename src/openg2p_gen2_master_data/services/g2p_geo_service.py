@@ -34,8 +34,11 @@ class G2PGeoService(BaseService):
         async with get_session_maker()() as session:
             query = select(G2PGeoLevel)
             
-            if parent_level_id is not None:
+            if parent_level_id is not None and parent_level_id != "":
                 query = query.where(G2PGeoLevel.parent_level_id == parent_level_id)
+            else:
+                # Get top-level entries with null parent_level_id
+                query = query.where(G2PGeoLevel.parent_level_id.is_(None))
             
             levels = (await session.execute(query)).scalars().all()
             
@@ -64,8 +67,12 @@ class G2PGeoService(BaseService):
         async with get_session_maker()() as session:
             query = select(G2PGeoLevelValue).where(G2PGeoLevelValue.level_id == level_id)
             
-            if parent_level_value_id is not None:
+            if parent_level_value_id is not None and parent_level_value_id != "":
                 query = query.where(G2PGeoLevelValue.parent_level_value_id == parent_level_value_id)
+            else:
+                # Get top-level entries with null parent_level_value_id
+                query = query.where(G2PGeoLevelValue.parent_level_value_id.is_(None))
+
             
             values = (await session.execute(query)).scalars().all()
             
