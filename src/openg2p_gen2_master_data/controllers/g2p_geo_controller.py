@@ -59,10 +59,10 @@ class G2PGeoController(BaseController):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.router.tags += ["Master Data"]
+        self.router.tags += ["/geo"]
         self.geo_service = G2PGeoService.get_component()
         self.request_response_helper = RequestResponseHelper().get_component()
-        self.router.prefix = "/master_data"
+        self.router.prefix = "/geo"
 
         self.router.add_api_route(
             "/get_g2p_geo_levels",
