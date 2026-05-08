@@ -19,7 +19,8 @@ dependencies = [
   "openg2p-fastapi-common >=1.1.4",
   "asyncpg",
   "psycopg2",
-  "fastapi-cache2"
+  "fastapi-cache2",
+  "jinja2"
   ]
 dynamic = ["version"]
 
