@@ -1,6 +1,6 @@
 import logging
 from typing import List, Optional
-from sqlalchemy import select
+from sqlalchemy import select, or_
 from openg2p_fastapi_common.service import BaseService
 
 from ..engine import get_session_maker
@@ -71,7 +71,13 @@ class G2PGeoService(BaseService):
                 query = query.where(G2PGeoLevelValue.parent_level_value_id == parent_level_value_id)
             else:
                 # Get top-level entries with null parent_level_value_id
-                query = query.where(G2PGeoLevelValue.parent_level_value_id.is_(None))
+                query = query.where(
+                    or_(
+                        G2PGeoLevelValue.parent_level_value_id.is_(None),
+                        G2PGeoLevelValue.parent_level_value_id == "NULL",
+                        G2PGeoLevelValue.parent_level_value_id == "",
+                    )
+                )
 
             
             values = (await session.execute(query)).scalars().all()
